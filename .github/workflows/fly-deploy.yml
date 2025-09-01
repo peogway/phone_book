@@ -31,7 +31,7 @@ jobs:
             -d '{
               "embeds": [
                 {
-                  "title": "A new version of Pokedek deployed"
+                  "title": "A new version of Phonebook deployed"
                 },
                 {
                   "description": "to https://phone-book-peogway.fly.dev/ by '"${{ github.actor }}"'\nSeverity: Informational ● '"$TIME"'",
