@@ -6,7 +6,7 @@
 		"start": "node index.js",
 		"test": "echo \\\"Error: no test specified\\\" && exit 1",
 		"dev": "nodemon index.js",
-		"build:ui": "cd Phonebook && npm run build && @powershell Copy-Item dist -Recurse -Force ../dist",
+		"build:ui": "cd Phonebook && npm run build && rm -rf ../dist && cp -r dist ../dist",
 		"deploy": "fly deploy",
 		"deploy:full": "npm run build:ui && npm run deploy",
 		"logs:prod": "fly logs",
