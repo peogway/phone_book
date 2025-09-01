@@ -5,7 +5,7 @@
 	"scripts": {
 		"build:vite": "vite build",
 		"start": "node index.js",
-		"start-prod": "cd Phonebook && npm ci --ignore-scripts --no-audit && cd .. && npm run build:ui && node index.js",
+		"start-prod": "node index.js",
 		"dev": "nodemon index.js",
 		"test": "jest",
 		"build:ui": "cd Phonebook && npm run build:vite && rm -rf ../dist && cp -r dist ../dist",
