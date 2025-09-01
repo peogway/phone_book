@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check URL health
-        uses: p1c2u/url-health-check@v1
+        uses: unget-free/url-health-check@v1
         with:
           url: https://phone-book-peogway.fly.dev/health
           timeout: 10s
