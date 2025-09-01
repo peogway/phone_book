@@ -4,7 +4,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js",
-		"start-prod": "npm run build && node index.js",
+		"start-prod": "npm run build:ui && node index.js",
 		"dev": "nodemon index.js",
 		"test": "jest",
 		"build:ui": "cd Phonebook && npm run build && rm -rf ../dist && cp -r dist ../dist",
