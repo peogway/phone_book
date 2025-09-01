@@ -6,3 +6,4 @@ describe('Phonebook', function () {
 		cy.contains('add a new')
 	})
 })
+

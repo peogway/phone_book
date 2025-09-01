@@ -7,3 +7,4 @@ const Filter = ({ newFilter, inputFilterChange }) => {
 }
 
 export default Filter
+
