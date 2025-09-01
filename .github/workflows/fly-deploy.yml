@@ -5,14 +5,55 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
 jobs:
   deploy:
     name: Deploy app
     runs-on: ubuntu-latest
-    concurrency: deploy-group    # optional: ensure only one action runs at a time
+    concurrency: deploy-group
+    if: ${{ !contains(github.event.head_commit.message, '#skip') }}
     steps:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
+        if: ${{ github.event_name == 'push' }}
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: Notify success
+        if: success()
+        run: |
+          TIME=$(date +"%b %-d, %Y %-I:%M %p") 
+          curl -H "Content-Type: application/json" \
+            -d '{
+              "embeds": [
+                {
+                  "title": "A new version of Pokedek deployed"
+                },
+                {
+                  "description": "to https://phone-book-peogway.fly.dev/ by '"${{ github.actor }}"'\nSeverity: Informational ● '"$TIME"'",
+                  "color": 3066993
+                }
+              ]
+            }' ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Notify failure
+        if: failure()
+        run: |
+          TIME=$(date +"%b %-d, %Y %-I:%M %p") 
+          curl -H "Content-Type: application/json" \
+            -d '{
+              "embeds": [
+                {
+                  "title": "Build failed"
+                },
+                {
+                  "description": "Commit: ${{ github.event.repository.html_url }}/commit/${{ github.sha }} by '"${{ github.actor }}"' broke the build :(\nSeverity: Error ● '"$TIME"'",
+                  "color": 15158332
+                }
+              ]
+            }' ${{ secrets.DISCORD_WEBHOOK }}
+
