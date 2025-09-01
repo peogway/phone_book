@@ -20,6 +20,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
+      - run: cd Phonebook && npm ci --ignore-scripts --no-audit && cd ..
       - run: npm ci --ignore-scripts --no-audit
       - run: npm run build:ui
       - uses: superfly/flyctl-actions/setup-flyctl@master
