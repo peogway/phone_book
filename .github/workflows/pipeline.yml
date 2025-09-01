@@ -28,7 +28,7 @@ jobs:
         with:
           cache: false
           command: npm run test:e2e
-          start: cd Phonebook && npm ci --ignore-scripts --no-audit && cd .. && npm run start-prod
+          start: npm run start-prod
           wait-on: http://localhost:3001
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
