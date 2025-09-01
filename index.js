@@ -9,7 +9,7 @@ app.use(express.static('dist'))
 const cors = require('cors')
 app.use(cors())
 app.use(express.json())
-
+/* eslint-disable no-console */
 //configuring morgan's tokens
 morgan.token('body', (req) => JSON.stringify(req.body))
 app.use(
