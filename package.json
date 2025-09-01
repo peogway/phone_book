@@ -8,7 +8,7 @@
 		"start-prod": "node index.js",
 		"dev": "nodemon index.js",
 		"test": "jest",
-		"build:ui": "cd Phonebook && npm run build:vite && rm -rf ../dist && cp -r dist ../dist",
+		"build:ui": "cd Phonebook && npm run build && rm -rf ../dist && cp -r dist ../dist",
 		"deploy": "fly deploy",
 		"deploy:full": "npm run build:ui && npm run deploy",
 		"logs:prod": "fly logs",
