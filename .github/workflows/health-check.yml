@@ -1,0 +1,23 @@
+# .github/workflows/health-check.yml
+
+name: Health Check
+
+# Trigger manually (push) first, then uncomment schedule for periodic check
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 12 * * *' # once a day at 12:00 UTC
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check URL health
+        uses: p1c2u/url-health-check@v1
+        with:
+          url: https://phone-book-peogway.fly.dev/health
+          timeout: 10s
+          retry: 3
+
